@@ -1,3 +1,6 @@
+// 206396863
+// natalisadikov2318@gmail.com
+
 #ifndef BOARD_HPP
 #define BOARD_HPP
 

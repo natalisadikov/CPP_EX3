@@ -1,3 +1,6 @@
+// 206396863
+// natalisadikov2318@gmail.com
+
 #include "board.hpp"
 #include <fstream>
 #include <iostream>

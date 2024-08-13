@@ -1,3 +1,6 @@
+/# 206396863
+# natalisadikov2318@gmail.com
+
 CXX = clang++
 CXXFLAGS = -Wall -Wextra -std=c++17
 LDFLAGS =
