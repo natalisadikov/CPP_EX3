@@ -2,8 +2,8 @@
 // natalisadikov2318@gmail.com
 
 #include "player.hpp"
-
-player::player(){
+// initializes player's resources and points
+player::player(){ 
     this->points = 2;
     this->wood = 0;
     this->bricks = 0;
@@ -32,9 +32,9 @@ int player::get_points(){
 
 int player::roll_dice(){
     int randomNumber = 0;
-    srand(time(0));  // Seed the random number generator
-    randomNumber += rand() % 6 + 1;  // Random number between 1 and 100
-    randomNumber += rand() % 6 + 1;  // Random number between 1 and 100
+    srand(time(0));  // Seed the random number generator baset on current time
+    randomNumber += rand() % 6 + 1;  // Random number 
+    randomNumber += rand() % 6 + 1;  // Random number
     cout << "DICE PRODUCED " << randomNumber << endl;
     return randomNumber;
 }

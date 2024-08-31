@@ -1,4 +1,4 @@
-/# 206396863
+# 206396863
 # natalisadikov2318@gmail.com
 
 CXX = clang++

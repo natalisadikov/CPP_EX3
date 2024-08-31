@@ -20,6 +20,7 @@ void catan::setup() {
 }
 
 void catan::update_resources(player& p, int loc) {
+    // updates the resources using a file
     ifstream file("regions.txt");
     if (!file.is_open()) {
         cerr << "Unable to open file" << endl;
@@ -84,6 +85,7 @@ void catan::update_resources(player& p, int loc) {
 
 void catan::initiate_prep() {
     int choice, direction;
+    //each player place two settlements and roads
     for (int i = 1; i <= 3; ++i) {
         player& p = (i == 1) ? p1 : (i == 2) ? p2 : p3;
         for (int j = 1; j <= 2; ++j) {
@@ -94,25 +96,26 @@ void catan::initiate_prep() {
                 cout << "Enter direction to place road: ";
                 cin >> direction;
                 cin.ignore();
-                if (!is_occupied(choice, direction))
+                if (!is_occupied(choice, direction))// use is_occupied() to check if a location is already occupied
                     break;
                 cout << "Location already entered. Please try again..." << endl;
             }
-            append_file(i, choice, direction);
-            update_resources(p, choice);
+            append_file(i, choice, direction);//update the occupied locations file
+            update_resources(p, choice);//update player's resources based on the placed settlement
         }
     }
 }
 
-void catan::initiate_round() {
+void catan::initiate_round() { // player turn
     int choice;
     for (int i = 1; i <= 3; ++i) {
         player& p = (i == 1) ? p1 : (i == 2) ? p2 : p3;
         cout << "Rolling dice for " << p.get_name() << endl;
-        int number = p.roll_dice();
+        int number = p.roll_dice();// rolling dices
         cout << "Alloting resources to players..." << endl;
         cout << "bricks: " << p.bricks << ", iron: " << p.iron << ", oats: " << p.oats << ", wood: " << p.wood << ", wool: " << p.wool << endl;
 
+        //development card
         if (p.iron >= 1 && p.wool >= 1 && p.oats >= 1) {
             cout << "Would you like to buy development card. Enter 1 for yes, 0 for no: ";
             cin >> choice;
@@ -120,6 +123,7 @@ void catan::initiate_round() {
                 cout << "Development Card Issued..." << endl;
         }
 
+        // trade
         cout << "Would you like to trade with someone. Enter 1 for yes, 0 for no: ";
         cin >> choice;
         cin.ignore();
@@ -138,7 +142,7 @@ void catan::initiate_round() {
             trade_item(player_num, item1, item2);
             curr = (i == 1) ? p2 : (i == 2) ? p3 : p1;
         }
-
+         // settlement
         cout << "Would you like to place settlement. Enter 1 for yes, 0 for no: ";
         cin >> choice;
         cin.ignore();
@@ -151,7 +155,7 @@ void catan::initiate_round() {
                     break;
                 cout << "Invalid location. Please try again..." << endl;
             }
-            ofstream file("occupied.txt", ios::app);
+            ofstream file("occupied.txt", ios::app);// updates the occupied file
             if (!file.is_open()) {
                 cerr << "Unable to open file" << endl;
                 return;

@@ -24,6 +24,7 @@ board::board() {
 }
 
 void board::print_board() {
+    //print the land types and their resources
     std::cout << std::endl;
     std::cout << "F = forest (yields wood)" << std::endl;
     std::cout << "H = hills (yields bricks)" << std::endl;
@@ -32,6 +33,7 @@ void board::print_board() {
     std::cout << "M = mountains (yields iron)" << std::endl;
     std::cout << "D = desert (yields nothing)" << std::endl << std::endl;
 
+    //print the board with the land types, hexagon values and numbers of junctions
     for(int i = 0; i < 5; i++) {
         if (i == 1 || i == 3) {
             std::cout << "      ";
@@ -39,7 +41,7 @@ void board::print_board() {
             std::cout << "\n             ";
         }
         for (int j = 0; j < 5; j++) {
-            if(arr[i][j] != 0)
+            if(arr[i][j] != 0 && land[i][j] != 0)
                 std::cout << "[ " << land[i][j] << ", " << std::setw(2) << arr[i][j] << " ]" << "     ";
         }
         if (i == 0) {
@@ -59,6 +61,7 @@ void board::print_board() {
             std::cout << std::endl << std::endl;
         }
     }
+    //print the direction map for the road
     std::cout << std::endl << "Directions: \n";
     std::cout << "1\t\t2\t\t3\n\n\t\t*\n\n4\t\t5\t\t6\n\n";
 }
@@ -68,7 +71,7 @@ bool board::is_occupied(int loc, int dir) {
         std::cout << "Invalid location or direction.\n";
         return false;
     }
-
+    //using file to check occupeid location
     std::ifstream file("occupied.txt");
     if (!file.is_open()) {
         std::cerr << "Unable to open file" << std::endl;
